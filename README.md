@@ -27,7 +27,8 @@ Ou publique no **GitHub Pages** (Settings → Pages → branch `main`) e acesse 
 > Na primeira execução o modelo é baixado (dezenas de MB) e fica em cache no navegador.
 
 ## Slides
-Apresentação segue na pasta Slides
+Apresentação segue no link abaixo 
+slides/Workshop_Web_AI_v2.pptx
 
 ---
 Autor: [Carlos Absalão](https://www.linkedin.com/in/carlos-absalao-dados-ia) · Licença MIT
