@@ -1,0 +1,25 @@
+# Segredos — nunca versionar
+.env
+config/fontes.yaml
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Dados e artefatos locais
+*.duckdb
+.chroma/
+target/
+logs/
+dbt_packages/
+
+# Sistema
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
