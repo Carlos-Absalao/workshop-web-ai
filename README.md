@@ -13,7 +13,7 @@ Material do workshop que apresentei para a graduação da **Faculdade Nova Roma*
 3. **Mão na massa:** três demos prontas para abrir no navegador.
 4. **Limites e boas práticas:** tamanho de modelo, cache, desempenho em celular.
 
-## Demos
+## HTML
 
 | Demo | Tarefa | Arquivo |
 |---|---|---|
@@ -27,8 +27,7 @@ Ou publique no **GitHub Pages** (Settings → Pages → branch `main`) e acesse 
 > Na primeira execução o modelo é baixado (dezenas de MB) e fica em cache no navegador.
 
 ## Slides
-
-Adicione aqui o link ou o PDF dos slides do workshop (`slides/`).
+Apresentação segue na pasta Slides
 
 ---
 Autor: [Carlos Absalão](https://www.linkedin.com/in/carlos-absalao-dados-ia) · Licença MIT
