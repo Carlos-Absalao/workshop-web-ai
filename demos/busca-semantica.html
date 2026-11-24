@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Busca semântica · Web AI</title>
+<style>
+ body{font-family:system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 16px;color:#1f2937}
+ h1{font-size:1.6rem} textarea,input{width:100%;padding:10px;font-size:1rem;border:1px solid #cbd5e1;border-radius:8px;box-sizing:border-box}
+ button{margin-top:10px;padding:10px 18px;font-size:1rem;border:0;border-radius:8px;background:#4f46e5;color:#fff;cursor:pointer}
+ button:disabled{background:#94a3b8} pre{background:#f1f5f9;padding:12px;border-radius:8px;white-space:pre-wrap}
+ a{color:#4f46e5}
+</style>
+</head>
+<body>
+<p><a href="index.html">← demos</a></p>
+<h1>Busca semântica</h1>
+<p>Modelo rodando 100% no seu navegador com Transformers.js. Nenhum dado sai da sua máquina.</p>
+<p>Base de frases (uma por linha):</p><textarea id="base" rows="6">Como emitir a segunda via do boleto?
+Qual o prazo de vigência da ata de registro de preço?
+Onde consulto o andamento do meu processo?
+Como solicitar férias no sistema?</textarea><p>Sua pergunta:</p><input id="q" value="até quando vale a ata?">
+<button id="btn">Executar</button>
+<pre id="out">Carregue e execute…</pre>
+<script type="module">
+import { pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3";
+const out = document.getElementById("out"), btn = document.getElementById("btn");
+let modelo;
+btn.onclick = async () => {
+  btn.disabled = true;
+  try {
+    if (!modelo) { out.textContent = "Baixando modelo (só na primeira vez)…"; modelo = await pipeline("feature-extraction", "Xenova/paraphrase-multilingual-MiniLM-L12-v2"); }
+    out.textContent = "Processando…";
+    const base = document.getElementById("base").value.split("\n").filter(Boolean);
+    const emb = async t => (await modelo(t, { pooling: "mean", normalize: true })).data;
+    const q = await emb(document.getElementById("q").value);
+    const cos = (a,b) => a.reduce((s,v,i)=>s+v*b[i],0);
+    const res = [];
+    for (const f of base) res.push([cos(q, await emb(f)), f]);
+    res.sort((a,b)=>b[0]-a[0]);
+    out.textContent = res.map(([s,f])=>`${(s*100).toFixed(1)}%  ${f}`).join("\n");
+  } catch (e) { out.textContent = "Erro: " + e.message; }
+  btn.disabled = false;
+};
+</script>
+</body>
+</html>
